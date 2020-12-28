@@ -378,8 +378,9 @@ set_helk_build() {
       echo " "
       echo "1. KAFKA + KSQL + ELK + NGNIX"
       echo "2. KAFKA + KSQL + ELK + NGNIX + ELASTALERT"
-      echo "3. KAFKA + KSQL + ELK + NGNIX + SPARK + JUPYTER"
-      echo "4. KAFKA + KSQL + ELK + NGNIX + SPARK + JUPYTER + ELASTALERT"
+      echo "3. KAFKA + KSQL + ELK + NGNIX + ELASTALERT PRAECO"
+      echo "4. KAFKA + KSQL + ELK + NGNIX + SPARK + JUPYTER"
+      echo "5. KAFKA + KSQL + ELK + NGNIX + SPARK + JUPYTER + ELASTALERT"
       echo " "
 
       local CONFIG_CHOICE
@@ -394,7 +395,8 @@ set_helk_build() {
         case $CONFIG_CHOICE in
                     1) HELK_BUILD='helk-kibana-analysis';break;;
                     2) HELK_BUILD='helk-kibana-analysis-alert';break;;
-        3)
+                    3) HELK_BUILD='helk-kibana-analysis-alert-praeco';break;;
+        4)
           if [[ $AVAILABLE_MEMORY -le $INSTALL_MINIMUM_MEMORY_NOTEBOOK ]]; then
             echo "$HELK_INFO_TAG Your available memory for HELK build option ${HELK_BUILD} is not enough."
             echo "$HELK_INFO_TAG Minimum required for this build option is $INSTALL_MINIMUM_MEMORY_NOTEBOOK MBs."
@@ -405,7 +407,7 @@ set_helk_build() {
                         break;
           fi
           ;;
-        4)
+        5)
           if [[ $AVAILABLE_MEMORY -le $INSTALL_MINIMUM_MEMORY_NOTEBOOK ]]; then
             echo "$HELK_INFO_TAG Your available memory for HELK build option ${HELK_BUILD} is not enough."
             echo "$HELK_INFO_TAG Minimum required for this build option is $INSTALL_MINIMUM_MEMORY_NOTEBOOK MBs."
