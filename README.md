@@ -10,6 +10,10 @@ The Hunting ELK or simply the HELK is one of the first open source hunt platform
 
 ![](docs/images/HELK-Design.png "HELK Infrastructure")
 
+# PRAECO 
+
+[Introduction](https://github.com/johnsusek/praeco) is an alerting tool for Elasticsearch – a GUI for ElastAlert, using the ElastAlert API is a fork.
+
 # Goals
 
 * Provide an open source hunting platform to the community and share the basics of Threat Hunting.
