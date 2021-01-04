@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detection for mshta.exe suspicious execution patterns sometimes involving file polyglotism
+filter:
+- query:
+    query_string:
+      query: (process_path.keyword:*\\mshta.exe AND process_command_line.keyword:(*vbscript* OR *.jpg* OR *.png* OR *.lnk* OR *.xls* OR *.doc* OR *.zip*))
+index: logs-endpoint-winevent-*
+name: cc7abbd0-762b-41e3-8a26-57ad50d2eea3_0 MSHTA Suspicious Execution 01
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

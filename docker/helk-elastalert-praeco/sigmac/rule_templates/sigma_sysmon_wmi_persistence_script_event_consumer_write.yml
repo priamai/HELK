@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects file writes of WMI script event consumer
+filter:
+- query:
+    query_string:
+      query: process_path:"C\:\\WINDOWS\\system32\\wbem\\scrcons.exe"
+index: logs-endpoint-winevent-*
+name: 33f41cdd-35ac-4ba8-814b-c6a4244a1ad4_0 WMI Persistence - Script Event Consumer File Write
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

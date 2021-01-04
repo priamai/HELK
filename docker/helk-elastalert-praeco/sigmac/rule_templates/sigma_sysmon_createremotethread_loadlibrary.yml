@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects potential use of CreateRemoteThread api and LoadLibrary function to inject DLL into a process
+filter:
+- query:
+    query_string:
+      query: (event_id:"8" AND thread_start_module.keyword:*\\kernel32.dll AND thread_start_function:"LoadLibraryA")
+index: logs-endpoint-winevent-sysmon-*
+name: 052ec6f6-1adc-41e6-907a-f1c813478bee_0 CreateRemoteThread API and LoadLibrary
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

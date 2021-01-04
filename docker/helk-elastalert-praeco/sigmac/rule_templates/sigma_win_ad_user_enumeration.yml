@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects access to a domain user from a non-machine account
+filter:
+- query:
+    query_string:
+      query: ((event_id:"4662" AND object_type.keyword:(*bf967aba\-0de6\-11d0\-a285\-00aa003049e2*)) AND (NOT (user_name.keyword:*$ OR user_name.keyword:MSOL_*)))
+index: logs-endpoint-winevent-*
+name: ab6bffca-beff-4baa-af11-6733f296d57a_0 AD User Enumeration
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

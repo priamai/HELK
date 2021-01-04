@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detect run not allowed files. Applocker is a very useful tool, especially on servers where unprivileged users have access. For example terminal servers. You need configure applocker and log collect to receive these events.
+filter:
+- query:
+    query_string:
+      query: event_id:("8004" OR "8007")
+index: logs-endpoint-winevent-*
+name: 401e5d00-b944-11ea-8f9a-00163ecd60ae_0 File Was Not Allowed To Run
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

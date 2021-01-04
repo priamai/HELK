@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious process that use escape characters
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_command_line.keyword:(*h\^t\^t\^p* OR *h\"t\"t\"p*))
+index: logs-endpoint-winevent-*
+name: f0cdd048-82dc-4f7a-8a7a-b87a52b6d0fd_0 Suspicious Commandline Escape
+priority: 4
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

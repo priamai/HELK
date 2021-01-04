@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects creation of a new service
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND ((process_path.keyword:*\\sc.exe AND process_command_line.keyword:*create* AND process_command_line.keyword:*binpath*) OR (process_path.keyword:*\\powershell.exe AND process_command_line.keyword:*new\-service*)))
+index: logs-endpoint-winevent-*
+name: 7fe71fc9-de3b-432a-8d57-8c809efc10ab_0 New Service Creation
+priority: 4
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

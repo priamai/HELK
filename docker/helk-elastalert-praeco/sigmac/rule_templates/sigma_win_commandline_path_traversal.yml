@@ -1,0 +1,16 @@
+alert:
+- debug
+description: detects the usage of path traversal in cmd.exe indicating possible command/argument confusion/hijacking
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_parent_command_line.keyword:*cmd*\/c* AND process_command_line.keyword:*\/..\/..\/*)
+index: logs-endpoint-winevent-security-*
+name: 087790e3-3287-436c-bccf-cbd0184a7db1_0 Cmd.exe CommandLine Path Traversal
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

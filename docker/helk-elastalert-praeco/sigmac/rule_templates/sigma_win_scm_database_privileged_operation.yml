@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects non-system users performing privileged operation os the SCM database
+filter:
+- query:
+    query_string:
+      query: (event_id:"4674" AND object_type:"SC_MANAGER\ OBJECT" AND object_name:"servicesactive" AND object_privilege_list:"SeTakeOwnershipPrivilege" AND SubjectLogonId:"0x3e4")
+index: logs-endpoint-winevent-*
+name: dae8171c-5ec6-4396-b210-8466585b53e9_0 SCM Database Privileged Operation
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

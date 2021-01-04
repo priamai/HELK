@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects changes to 'HKCU\Software\Classes\Folder\shell\open\command\DelegateExecute'
+filter:
+- query:
+    query_string:
+      query: (registry_key_path:("HKCU\\Software\\Classes\\Folder\\shell\\open\\command\\DelegateExecute") AND event_category_type:("SetValue"))
+index: logs-endpoint-winevent-*
+name: 07743f65-7ec9-404a-a519-913db7118a8d_0 COM Hijack via Sdclt
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

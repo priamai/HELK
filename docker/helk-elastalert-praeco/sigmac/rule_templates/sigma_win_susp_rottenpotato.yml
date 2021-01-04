@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects logon events that have characteristics of events generated during an attack with RottenPotato and the like
+filter:
+- query:
+    query_string:
+      query: (event_id:"4624" AND logon_type:"3" AND TargetUserName:"ANONYMOUS_LOGON" AND src_host_name:"\-" AND SourceNetworkAddress:"127.0.0.1")
+index: logs-endpoint-winevent-*
+name: 16f5d8ca-44bd-47c8-acbe-6fc95a16c12f_0 RottenPotato Like Attack Pattern
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

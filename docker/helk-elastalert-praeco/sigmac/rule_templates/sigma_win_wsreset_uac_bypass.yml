@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a method that uses Wsreset.exe tool that can be used to reset the Windows Store to bypass UAC
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_parent_path.keyword:(*\\WSreset.exe))
+index: logs-endpoint-winevent-*
+name: bdc8918e-a1d5-49d1-9db7-ea0fd91aa2ae_0 Wsreset UAC Bypass
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious command line activity on Windows systems
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_command_line:("net\ group\ \"domain\ admins\"\ \/domain" OR "net\ localgroup\ administrators"))
+index: logs-endpoint-winevent-security-*
+name: d95de845-b83c-4a9a-8a6a-4fc802ebf6c0_0 Suspicious Reconnaissance Activity
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

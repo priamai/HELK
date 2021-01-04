@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a suspicious child process of a Windows shell
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_parent_path.keyword:(*\\mshta.exe OR *\\powershell.exe OR *\\rundll32.exe OR *\\cscript.exe OR *\\wscript.exe OR *\\wmiprvse.exe) AND process_path.keyword:(*\\schtasks.exe OR *\\nslookup.exe OR *\\certutil.exe OR *\\bitsadmin.exe OR *\\mshta.exe)) AND (NOT (process_current_directory.keyword:*\\ccmcache\\*)))
+index: logs-endpoint-winevent-*
+name: 3a6586ad-127a-4d3b-a677-1e6eacdf8fde_0 Windows Shell Spawning Suspicious Program
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

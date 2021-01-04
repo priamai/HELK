@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects specific process parameters as used by Mustang Panda droppers
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_command_line.keyword:(*Temp\\wtask.exe\ \/create* OR *%windir\:\~\-3,1%%PUBLIC\:\~\-9,1%* OR *\/E\:vbscript\ *\ C\:\\Users\\*.txt\"\ \/F OR *\/tn\ \"Security\ Script\ * OR *%windir\:\~\-1,1%*) OR process_path.keyword:(*Temp\\winwsh.exe)))
+index: logs-endpoint-winevent-*
+name: 2d87d610-d760-45ee-a7e6-7a6f2a65de00_0 Mustang Panda Dropper
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

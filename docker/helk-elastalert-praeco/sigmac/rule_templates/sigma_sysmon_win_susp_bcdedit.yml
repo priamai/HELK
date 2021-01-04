@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects, possibly, malicious unauthorized usage of bcdedit.exe
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:*\\bcdedit.exe AND process_command_line.keyword:(*delete* OR *deletevalue* OR *import*))
+index: logs-endpoint-winevent-*
+name: c9fbe8e9-119d-40a6-9b59-dd58a5d84429_0 Possible Ransomware or Unauthorized MBR Modifications
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

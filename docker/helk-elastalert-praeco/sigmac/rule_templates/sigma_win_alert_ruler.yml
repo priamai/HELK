@@ -1,0 +1,16 @@
+alert:
+- debug
+description: This events that are generated when using the hacktool Ruler by Sensepost
+filter:
+- query:
+    query_string:
+      query: (src_host_name:"RULER" AND (event_id:("4776") OR event_id:("4624" OR "4625")))
+index: logs-endpoint-winevent-security-*
+name: 24549159-ac1b-479c-8175-d42aea947cae_0 Hacktool Ruler
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

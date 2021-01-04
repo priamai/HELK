@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a suspicious Microsoft desktopimgdownldr execution with parameters used to download files from the Internet
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND ((event_id:"1" AND process_command_line.keyword:*\ \/lockscreenurl\:* AND (NOT (process_command_line.keyword:(*.jpg* OR *.jpeg* OR *.png*)))) OR (process_command_line.keyword:*reg\ delete* AND process_command_line.keyword:*\\PersonalizationCSP*)))
+index: logs-endpoint-winevent-sysmon-*
+name: bb58aa4a-b80b-415a-a2c0-2f65a4c81009_0 Suspicious Desktopimgdownldr Command
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

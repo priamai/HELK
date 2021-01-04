@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the attack technique pass the hash which is used to move laterally inside the network
+filter:
+- query:
+    query_string:
+      query: ((event_id:"4624" AND ((SubjectUserSid:"S\-1\-0\-0" AND logon_type:"3" AND logon_process_name:"NtLmSsp" AND KeyLength:"0") OR (logon_type:"9" AND logon_process_name:"seclogo"))) AND (NOT (user_name:"ANONYMOUS\ LOGON")))
+index: logs-endpoint-winevent-*
+name: 8eef149c-bd26-49f2-9e5a-9b00e3af499b_0 Pass the Hash Activity 2
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

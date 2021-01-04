@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects access to a protected_storage service over the network. Potential abuse of DPAPI to extract domain backup keys from Domain Controllers
+filter:
+- query:
+    query_string:
+      query: (event_id:"5145" AND share_name.keyword:*IPC* AND share_relative_target_name:"protected_storage")
+index: logs-endpoint-winevent-*
+name: 45545954-4016-43c6-855e-eae8f1c369dc_0 Protected Storage Service Access
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

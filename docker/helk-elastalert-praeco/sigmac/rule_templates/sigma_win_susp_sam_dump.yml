@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious SAM dump activity as cause by QuarksPwDump and other password dumpers
+filter:
+- query:
+    query_string:
+      query: (event_id:"16" AND Message.keyword:(*\\AppData\\Local\\Temp\\SAM\-*.dmp\ *))
+index: logs-endpoint-winevent-*
+name: 839dd1e8-eda8-4834-8145-01beeee33acd_0 SAM Dump to AppData
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

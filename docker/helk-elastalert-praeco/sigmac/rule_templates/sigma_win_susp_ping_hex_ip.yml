@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a ping command that uses a hex encoded IP address
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_command_line.keyword:(*\\ping.exe\ 0x* OR *\\ping\ 0x*))
+index: logs-endpoint-winevent-security-*
+name: 1a0d4aba-7668-4365-9ce4-6d79ab088dfd_0 Ping Hex IP
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

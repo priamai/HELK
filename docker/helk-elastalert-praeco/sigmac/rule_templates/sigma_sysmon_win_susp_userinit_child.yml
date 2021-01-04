@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a suspicious child process of userinit
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_parent_path.keyword:*\\userinit.exe AND (NOT (process_command_line.keyword:*\\netlogon\\*))) AND (NOT (process_path.keyword:*\\explorer.exe)))
+index: logs-endpoint-winevent-*
+name: b655a06a-31c0-477a-95c2-3726b83d649d_0 Suspicious Userinit Child Process
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

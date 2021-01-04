@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Request to amsiInitFailed that can be used to disable AMSI Scanning
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_command_line.keyword:(*System.Management.Automation.AmsiUtils*) AND process_command_line.keyword:(*amsiInitFailed*))
+index: logs-endpoint-winevent-*
+name: 30edb182-aa75-42c0-b0a9-e998bb29067c_0 Powershell AMSI Bypass via .NET Reflection
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a suspicious svchost process start
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_path.keyword:*\\svchost.exe AND (NOT (process_parent_path.keyword:(*\\services.exe OR *\\MsMpEng.exe OR *\\Mrt.exe OR *\\rpcnet.exe OR *\\svchost.exe)))) AND (NOT (NOT _exists_:process_parent_path)))
+index: logs-endpoint-winevent-sysmon-*
+name: 01d2e2a1-5f09-44f7-9fc1-24faa7479b6d_0 Suspicious Svchost Process
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

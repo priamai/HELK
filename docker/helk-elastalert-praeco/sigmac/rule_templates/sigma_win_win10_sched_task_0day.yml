@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Task Scheduler .job import arbitrary DACL write\par
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_path.keyword:*\\schtasks.exe AND process_command_line.keyword:*\/change*\/TN*\/RU*\/RP*)
+index: logs-endpoint-winevent-*
+name: 931b6802-d6a6-4267-9ffa-526f57f22aaf_0 Windows 10 Scheduled Task SandboxEscaper 0-day
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

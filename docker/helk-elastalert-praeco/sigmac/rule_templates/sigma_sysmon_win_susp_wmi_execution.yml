@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects WMI executing suspicious commands
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:(*\\wmic.exe) AND process_command_line.keyword:(*\/NODE\:*process\ call\ create\ * OR *\ path\ AntiVirusProduct\ get\ * OR *\ path\ FirewallProduct\ get\ * OR *\ shadowcopy\ delete\ *))
+index: logs-endpoint-winevent-sysmon-*
+name: 526be59f-a573-4eea-b5f7-f0973207634d_0 Suspicious WMI Execution
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

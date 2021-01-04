@@ -1,0 +1,16 @@
+alert:
+- debug
+description: This rule detects a suspicious crash of the Microsoft Malware Protection Engine
+filter:
+- query:
+    query_string:
+      query: (((source_name:"Application\ Error" AND event_id:"1000") OR (source_name:"Windows\ Error\ Reporting" AND event_id:"1001")) AND Message.keyword:(*MsMpEng.exe* OR *mpengine.dll*))
+index: logs-endpoint-winevent-application-*
+name: 6c82cf5c-090d-4d57-9188-533577631108_0 Microsoft Malware Protection Engine Crash
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

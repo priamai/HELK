@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Execute VBscript code that is referenced within the *.bgi file.
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_path.keyword:*\\bginfo.exe AND process_command_line.keyword:*\/popup* AND process_command_line.keyword:*\/nolicprompt*)
+index: logs-endpoint-winevent-security-*
+name: aaf46cdc-934e-4284-b329-34aa701e3771_0 Application Whitelisting Bypass via Bginfo
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

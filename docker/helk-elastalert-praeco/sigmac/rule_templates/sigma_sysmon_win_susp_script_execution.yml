@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious file execution by wscript and cscript
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:(*\\wscript.exe OR *\\cscript.exe) AND process_command_line.keyword:(*.jse* OR *.vbe* OR *.js* OR *.vba*))
+index: logs-endpoint-winevent-*
+name: 1e33157c-53b1-41ad-bbcc-780b80b58288_0 WSF/JSE/JS/VBA/VBE File Execution
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

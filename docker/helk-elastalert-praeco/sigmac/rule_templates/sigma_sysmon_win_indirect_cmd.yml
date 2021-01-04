@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detect indirect command execution via Program Compatibility Assistant pcalua.exe or forfiles.exe
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_parent_path.keyword:(*\\pcalua.exe OR *\\forfiles.exe))
+index: logs-endpoint-winevent-*
+name: fa47597e-90e9-41cd-ab72-c3b74cfb0d02_0 Indirect Command Execution
+priority: 4
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

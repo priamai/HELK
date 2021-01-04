@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects creation or execution of UserInitMprLogonScript persistence method
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND ((event_id:"4688" AND (process_parent_path.keyword:*\\userinit.exe AND (NOT (process_path.keyword:*\\explorer.exe))) AND (NOT (process_command_line.keyword:(*netlogon.bat* OR *UsrLogon.cmd*)))) OR process_command_line.keyword:*UserInitMprLogonScript*))
+index: logs-endpoint-winevent-*
+name: 0a98a10c-685d-4ab0-bddc-b6bdd1d48458_0 Logon Scripts (UserInitMprLogonScript)
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

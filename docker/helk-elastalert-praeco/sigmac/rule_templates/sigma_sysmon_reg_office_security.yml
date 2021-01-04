@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects registry changes to Office macro settings
+filter:
+- query:
+    query_string:
+      query: (event_id:("12" OR "13") AND registry_key_path.keyword:(*\\Security\\Trusted\ Documents\\TrustRecords OR *\\Security\\AccessVBOM OR *\\Security\\VBAWarnings) AND event_category_type:("SetValue" OR "DeleteValue" OR "CreateValue"))
+index: logs-endpoint-winevent-sysmon-*
+name: a166f74e-bf44-409d-b9ba-ea4b2dd8b3cd_0 Office Security Settings Changed
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

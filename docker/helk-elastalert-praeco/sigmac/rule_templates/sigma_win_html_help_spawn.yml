@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a suspicious child process of a Microsoft HTML Help system when executing compiled HTML files (.chm)
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_parent_path:"C\:\\Windows\\hh.exe" AND process_path.keyword:(*\\cmd.exe OR *\\powershell.exe OR *\\wscript.exe OR *\\cscript.exe OR *\\regsvr32.exe OR *\\wmic.exe OR *\\rundll32.exe))
+index: logs-endpoint-winevent-*
+name: 52cad028-0ff0-4854-8f67-d25dfcbc78b4_0 HTML Help Shell Spawn
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

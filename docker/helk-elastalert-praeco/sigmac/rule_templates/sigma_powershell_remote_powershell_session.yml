@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects remote PowerShell sessions
+filter:
+- query:
+    query_string:
+      query: (event_id:("4103" OR "400") AND HostName:"ServerRemoteHost" AND HostApplication.keyword:*wsmprovhost.exe*)
+index: logs-endpoint-winevent-powershell-*
+name: 96b9f619-aa91-478f-bacb-c3e50f8df575_0 Remote PowerShell Session
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

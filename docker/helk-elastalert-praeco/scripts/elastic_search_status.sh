@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# HELK script: elastalert-entrypoint.sh
-# HELK script description: Creates Elastalert index
+# HELK script:elastic_search_status.sh
+# HELK script description: Start ELASTALERT
 # HELK build Stage: Alpha
-# Author: Roberto Rodriguez (@Cyb3rWard0g)
+# Author: paolo@priam.ai
 # License: GPL-3.0
 
 # *********** Helk log tagging variables ***************
@@ -46,4 +46,21 @@ until [[ "$(curl -s -o /dev/null -w "%{http_code}" $ELASTICSEARCH_ACCESS)" == "2
     sleep 3
 done
 
-echo "$HELK_ELASTALERT_INFO_TAG Elasticsearch is up and healthy at "
+echo "$HELK_ELASTALERT_INFO_TAG Elasticsearch is up"
+
+# *********** Transform SIGMA Rules to Elastalert Signatures *************
+echo "$HELK_ELASTALERT_INFO_TAG Executing pull-sigma.sh script.."
+pull-sigma.sh
+
+# *********** Creating Elastalert Status Index ***************
+response_code=$(curl -s -o /dev/null -w "%{http_code}" $ELASTICSEARCH_ACCESS/praeco_elastalert_status)
+if [[ $response_code == 404 ]]; then
+    echo "$HELK_ELASTALERT_INFO_TAG Creating Elastalert index.."
+    if [[ -n "$ELASTIC_PASSWORD" ]]; then
+        elastalert-create-index --host $ES_HOST --port $ES_PORT --username $ELASTIC_USERNAME --password "$ELASTIC_PASSWORD" --no-auth --no-ssl --url-prefix '' --old-index ''
+    else
+        elastalert-create-index --host $ES_HOST --port $ES_PORT --no-auth --no-ssl --url-prefix '' --old-index ''
+    fi
+else
+    echo "$HELK_ELASTALERT_INFO_TAG Elastalert index already exists"
+fi

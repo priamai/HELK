@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Launch 64-bit shellcode from a debugger script file using cdb.exe.
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:*\\cdb.exe AND process_command_line.keyword:*\-cf*)
+index: logs-endpoint-winevent-*
+name: b5c7395f-e501-4a08-94d4-57fe7a9da9d2_0 Possible App Whitelisting Bypass via WinDbg/CDB as a Shellcode Runner
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -3,7 +3,7 @@
 # HELK script: elastalert-start.sh
 # HELK script description: Start ELASTALERT
 # HELK build Stage: Alpha
-# Author: Roberto Rodriguez (@Cyb3rWard0g)
+# Author: paolo@priam.ai
 # License: GPL-3.0
 
 # *********** Helk log tagging variables ***************

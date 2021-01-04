@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects WMI command line event consumers
+filter:
+- query:
+    query_string:
+      query: (process_path:"C\:\\Windows\\System32\\wbem\\WmiPrvSE.exe" AND ImageLoaded.keyword:*\\wbemcons.dll)
+index: logs-endpoint-winevent-*
+name: 05936ce2-ee05-4dae-9d03-9a391cf2d2c6_0 WMI Persistence - Command Line Event Consumer
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

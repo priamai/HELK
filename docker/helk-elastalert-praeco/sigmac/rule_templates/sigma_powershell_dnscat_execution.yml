@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Dnscat exfiltration tool execution
+filter:
+- query:
+    query_string:
+      query: (event_id:"4104" AND ScriptBlockText.keyword:*Start\-Dnscat2*)
+index: logs-endpoint-winevent-*
+name: a6d67db4-6220-436d-8afc-f3842fe05d43_0 Dnscat Execution
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

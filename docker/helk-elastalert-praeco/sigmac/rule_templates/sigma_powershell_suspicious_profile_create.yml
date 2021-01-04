@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a change in profile.ps1 of the Powershell profile
+filter:
+- query:
+    query_string:
+      query: (event_id:"11" AND file_name.keyword:*\\profile.ps1* AND (file_name.keyword:*\\My\ Documents\\PowerShell\\* OR file_name.keyword:*C\:\\Windows\\System32\\WindowsPowerShell\\v1.0\\*))
+index: logs-endpoint-winevent-sysmon-*
+name: b5b78988-486d-4a80-b991-930eff3ff8bf_0 Powershell Profile.ps1 Modification
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

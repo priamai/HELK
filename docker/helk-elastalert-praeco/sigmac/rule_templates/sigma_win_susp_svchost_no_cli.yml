@@ -1,0 +1,16 @@
+alert:
+- debug
+description: It is extremely abnormal for svchost.exe to spawn without any CLI arguments and is normally observed when a malicious process spawns the process and injects code into the process memory space.
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND (event_id:"4688" AND process_command_line.keyword:*svchost.exe AND process_path.keyword:*\\svchost.exe) AND (NOT (process_parent_path.keyword:(*\\rpcnet.exe OR *\\rpcnetp.exe))))
+index: logs-endpoint-winevent-*
+name: 16c37b52-b141-42a5-a3ea-bbe098444397_0 Suspect Svchost Activity
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

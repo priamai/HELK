@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Dynamic-link libraries (DLLs) that are specified in the AppCertDLLs value in the Registry key can be abused to obtain persistence and privilege escalation by causing a malicious DLL to be loaded and run in the context of separate processes on the computer.
+filter:
+- query:
+    query_string:
+      query: (registry_key_path:"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session\ Manager\\AppCertDlls" OR NewName:"HKLM\\SYSTEM\\CurentControlSet\\Control\\Session\ Manager\\AppCertDlls")
+index: logs-endpoint-winevent-*
+name: 6aa1d992-5925-4e9f-a49b-845e51d1de01_0 New DLL Added to AppCertDlls Registry Key
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

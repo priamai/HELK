@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a WMi backdoor in Exchange Transport Agents via WMi event filters
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_parent_path.keyword:*\\EdgeTransport.exe)
+index: logs-endpoint-winevent-security-*
+name: 797011dc-44f4-4e6f-9f10-a8ceefbe566b_0 WMI Backdoor Exchange Transport Agent
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

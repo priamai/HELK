@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects logons using NTLM to hosts that are potentially not part of the domain.
+filter:
+- query:
+    query_string:
+      query: (event_id:"8001" AND TargetName.keyword:TERMSRV*)
+index: logs-endpoint-winevent-*
+name: ce5678bb-b9aa-4fb5-be4b-e57f686256ad_0 Potential Remote Desktop Connection to Non-Domain Host
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

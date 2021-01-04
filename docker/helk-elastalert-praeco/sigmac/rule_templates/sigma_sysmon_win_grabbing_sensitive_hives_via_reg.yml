@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Dump sam, system or security hives using REG.exe utility
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:*\\reg.exe AND process_command_line.keyword:(*save* OR *export*) AND process_command_line.keyword:(*hklm* OR *hkey_local_machine*) AND process_command_line.keyword:(*\\system OR *\\sam OR *\\security))
+index: logs-endpoint-winevent-*
+name: fd877b94-9bb5-4191-bb25-d79cbd93c167_0 Grabbing Sensitive Hives via Reg Utility
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

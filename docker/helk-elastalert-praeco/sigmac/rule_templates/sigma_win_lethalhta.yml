@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects MSHTA.EXE spwaned by SVCHOST as seen in LethalHTA and described in report
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_parent_path.keyword:*\\svchost.exe AND process_path.keyword:*\\mshta.exe)
+index: logs-endpoint-winevent-*
+name: ed5d72a6-f8f4-479d-ba79-02f6a80d7471_0 MSHTA Spwaned by SVCHOST
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

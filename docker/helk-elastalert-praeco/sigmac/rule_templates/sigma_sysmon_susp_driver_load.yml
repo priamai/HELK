@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a driver load from a temporary directory
+filter:
+- query:
+    query_string:
+      query: ImageLoaded.keyword:*\\Temp\\*
+index: logs-endpoint-winevent-*
+name: 2c4523d5-d481-4ed0-8ec3-7fbf0cb41a75_0 Suspicious Driver Load from Temp
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

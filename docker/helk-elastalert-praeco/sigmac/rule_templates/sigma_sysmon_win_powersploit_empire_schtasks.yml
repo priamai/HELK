@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the creation of a schtask via PowerSploit or Empire Default Configuration.
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_parent_path.keyword:(*\\powershell.exe) AND process_command_line.keyword:(*schtasks*\/Create*\/SC\ *ONLOGON*\/TN\ *Updater*\/TR\ *powershell* OR *schtasks*\/Create*\/SC\ *DAILY*\/TN\ *Updater*\/TR\ *powershell* OR *schtasks*\/Create*\/SC\ *ONIDLE*\/TN\ *Updater*\/TR\ *powershell* OR *schtasks*\/Create*\/SC\ *Updater*\/TN\ *Updater*\/TR\ *powershell*))
+index: logs-endpoint-winevent-sysmon-*
+name: 56c217c3-2de2-479b-990f-5c109ba8458f_0 Default PowerSploit and Empire Schtasks Persistence
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

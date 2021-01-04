@@ -1,0 +1,61 @@
+alert:
+- debug
+description: Detects Chafer activity attributed to OilRig as reported in Nyotron report in March 2018
+filter:
+- query:
+    query_string:
+      query: (event_id:"7045" AND service_name:("SC\ Scheduled\ Scan" OR "UpdatMachine"))
+index: logs-endpoint-winevent-*
+name: 53ba33fd-3a50-4468-a5ef-c583635cfa92_0 Chafer Activity
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+alert:
+- debug
+description: Detects Chafer activity attributed to OilRig as reported in Nyotron report in March 2018
+filter:
+- query:
+    query_string:
+      query: (event_id:"4698" AND task_name:("SC\ Scheduled\ Scan" OR "UpdatMachine"))
+index: logs-endpoint-winevent-*
+name: 53ba33fd-3a50-4468-a5ef-c583635cfa92-2_0 Chafer Activity
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+alert:
+- debug
+description: Detects Chafer activity attributed to OilRig as reported in Nyotron report in March 2018
+filter:
+- query:
+    query_string:
+      query: (event_id:"13" AND event_category_type:"SetValue" AND (registry_key_path.keyword:(*SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\UMe OR *SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\UT) OR (registry_key_path.keyword:*\\Control\\SecurityProviders\\WDigest\\UseLogonCredential AND registry_key_value:"DWORD\ \(0x00000001\)")))
+index: logs-endpoint-winevent-*
+name: 53ba33fd-3a50-4468-a5ef-c583635cfa92-3_0 Chafer Activity
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+alert:
+- debug
+description: Detects Chafer activity attributed to OilRig as reported in Nyotron report in March 2018
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_command_line.keyword:(*\\Service.exe\ i OR *\\Service.exe\ u OR *\\microsoft\\Taskbar\\autoit3.exe OR C\:\\wsc.exe*) OR process_path.keyword:*\\Windows\\Temp\\DB\\*.exe OR (process_command_line.keyword:*\\nslookup.exe\ \-q\=TXT* AND process_parent_path.keyword:*\\Autoit*)))
+index: logs-endpoint-winevent-*
+name: 53ba33fd-3a50-4468-a5ef-c583635cfa92-4_0 Chafer Activity
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

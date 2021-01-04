@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects wmiexec/dcomexec/atexec/smbexec from Impacket framework
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND ((process_parent_path.keyword:(*\\wmiprvse.exe OR *\\mmc.exe OR *\\explorer.exe OR *\\services.exe) AND process_command_line.keyword:(*cmd.exe*\ \/Q\ \/c\ *\ \\\\127.0.0.1\\*&1*)) OR (process_parent_command_line.keyword:(*svchost.exe\ \-k\ netsvcs OR taskeng.exe*) AND process_command_line.keyword:(cmd.exe\ \/C\ *Windows\\Temp\\*&1))))
+index: logs-endpoint-winevent-sysmon-*
+name: 10c14723-61c7-4c75-92ca-9af245723ad2_0 Impacket Lateralization Detection
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

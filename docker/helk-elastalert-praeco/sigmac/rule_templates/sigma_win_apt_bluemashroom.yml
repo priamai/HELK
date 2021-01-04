@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a suspicious DLL loading from AppData Local path as described in BlueMashroom report
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_command_line.keyword:(*\\regsvr32*\\AppData\\Local\\* OR *\\AppData\\Local\\*,DllEntry*))
+index: logs-endpoint-winevent-security-*
+name: bd70d3f8-e60e-4d25-89f0-0b5a9cff20e0_0 BlueMashroom DLL Load
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Identifies use of the bcdedit command to delete boot configuration data. This tactic is sometimes used as by malware or an attacker as a destructive technique.
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_path.keyword:*\\bcdedit.exe AND process_command_line.keyword:*set*) AND ((process_command_line.keyword:*bootstatuspolicy* AND process_command_line.keyword:*ignoreallfailures*) OR (process_command_line.keyword:*recoveryenabled* AND process_command_line.keyword:*no*)))
+index: logs-endpoint-winevent-sysmon-*
+name: 1444443e-6757-43e4-9ea4-c8fc705f79a2_0 Modification of Boot Configuration
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

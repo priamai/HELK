@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the use of smbexec.py tool by detecting a specific service installation
+filter:
+- query:
+    query_string:
+      query: (event_id:"7045" AND service_name:"BTOBTO" AND service_image_path.keyword:*\\execute.bat)
+index: logs-endpoint-winevent-*
+name: 52a85084-6989-40c3-8f32-091e12e13f09_0 smbexec.py Service Installation
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Mimikatz DC sync security events
+filter:
+- query:
+    query_string:
+      query: (((event_id:"4662" AND object_properties.keyword:(*Replicating\ Directory\ Changes\ All* OR *1131f6ad\-9c07\-11d1\-f79f\-00c04fc2dcd2*)) AND (NOT (user_domain:"Window\ Manager"))) AND (NOT (user_name.keyword:(NT\ AUTHORITY* OR *$ OR MSOL_*))))
+index: logs-endpoint-winevent-*
+name: 611eab06-a145-4dfa-a295-3ccc5c20f59a_0 Mimikatz DC Sync
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

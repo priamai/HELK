@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Alerts on trust record modification within the registry, indicating usage of macros
+filter:
+- query:
+    query_string:
+      query: registry_key_path.keyword:*TrustRecords*
+index: logs-endpoint-winevent-*
+name: 295a59c1-7b79-4b47-a930-df12c15fc9c2_0 Windows Registry Trust Record Modification
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

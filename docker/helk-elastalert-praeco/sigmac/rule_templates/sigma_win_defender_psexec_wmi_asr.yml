@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects blocking of process creations originating from PSExec and WMI commands
+filter:
+- query:
+    query_string:
+      query: (event_id:"1121" AND process_path.keyword:(*\\wmiprvse.exe OR *\\psexesvc.exe))
+index: logs-*
+name: 97b9ce1e-c5ab-11ea-87d0-0242ac130003_0 PSExec and WMI Process Creations Block
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a discovery of domain trusts
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND ((process_path.keyword:*\\dsquery.exe AND process_command_line.keyword:*\-filter* AND process_command_line.keyword:*trustedDomain*) OR (process_path.keyword:*\\nltest.exe AND process_command_line.keyword:*domain_trusts*)))
+index: logs-endpoint-winevent-*
+name: 77815820-246c-47b8-9741-e0def3f57308_0 Domain Trust Discovery 01
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

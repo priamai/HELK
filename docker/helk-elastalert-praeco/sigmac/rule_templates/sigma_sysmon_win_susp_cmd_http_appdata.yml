@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a suspicious command line execution that includes an URL and AppData string in the command line parameters as used by several droppers (js/vbs > powershell)
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:(cmd.exe\ \/c\ *http\:\/\/*%AppData% OR cmd.exe\ \/c\ *https\:\/\/*%AppData%))
+index: logs-endpoint-winevent-*
+name: 1ac8666b-046f-4201-8aba-1951aaec03a3_0 Command Line Execution with Suspicious URL and AppData Strings
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

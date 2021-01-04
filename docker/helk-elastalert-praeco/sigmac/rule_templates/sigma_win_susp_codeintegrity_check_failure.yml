@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Code integrity failures may indicate tampered executables.
+filter:
+- query:
+    query_string:
+      query: event_id:("5038" OR "6281")
+index: logs-endpoint-winevent-*
+name: 470ec5fa-7b4e-4071-b200-4c753100f49b_0 Failed Code Integrity Checks
+priority: 4
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

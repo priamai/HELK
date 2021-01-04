@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious FromBase64String expressions in command line arguments
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:*\:\:FromBase64String\(*)
+index: logs-endpoint-winevent-sysmon-*
+name: e32d4572-9826-4738-b651-95fa63747e8a_0 FromBase64String Command Line
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

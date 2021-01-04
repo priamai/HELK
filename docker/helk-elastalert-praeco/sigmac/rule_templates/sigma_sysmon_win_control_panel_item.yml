@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the malicious use of a control panel item
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND ((process_command_line.keyword:*.cpl AND (NOT (process_command_line.keyword:(*\\System32\\* OR *%System%*)))) OR (process_command_line.keyword:(*reg\ add*) AND process_command_line.keyword:(*CurrentVersion\\Control\ Panel\\CPLs*))))
+index: logs-endpoint-winevent-sysmon-*
+name: 0ba863e6-def5-4e50-9cea-4dd8c7dc46a4_0 Control Panel Items
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

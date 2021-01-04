@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the execution of DLL side-loading malware used by threat group Emissary Panda aka APT27
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_parent_path.keyword:*\\sllauncher.exe AND process_path.keyword:*\\svchost.exe)
+index: logs-endpoint-winevent-security-*
+name: 9aa01d62-7667-4d3b-acb8-8cb5103e2014_0 Emissary Panda Malware SLLauncher
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

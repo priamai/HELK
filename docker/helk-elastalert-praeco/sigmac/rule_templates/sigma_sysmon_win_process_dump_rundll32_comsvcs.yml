@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a process memory dump performed via ordinal function 24 in comsvcs.dll
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:(*comsvcs.dll,#24* OR *comsvcs.dll,MiniDump*))
+index: logs-endpoint-winevent-sysmon-*
+name: 646ea171-dded-4578-8a4d-65e9822892e3_0 Process Dump via Rundll32 and Comsvcs.dll
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

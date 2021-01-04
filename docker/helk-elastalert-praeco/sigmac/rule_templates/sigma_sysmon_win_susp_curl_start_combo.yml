@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Adversaries can use curl to download payloads remotely and execute them. Curl is included by default in Windows 10 build 17063 and later.
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:*curl*\ start\ *)
+index: logs-endpoint-winevent-*
+name: 21dd6d38-2b18-4453-9404-a0fe4a0cc288_0 Curl Start Combination
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

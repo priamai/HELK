@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a suspicious curl process start on Windows and outputs the requested document to a local file
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_path.keyword:*\\curl.exe OR file_product:"The\ curl\ executable") AND process_command_line.keyword:*\ \-O\ *)
+index: logs-endpoint-winevent-sysmon-*
+name: e218595b-bbe7-4ee5-8a96-f32a24ad3468_0 Suspicious Curl Usage on Windows
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

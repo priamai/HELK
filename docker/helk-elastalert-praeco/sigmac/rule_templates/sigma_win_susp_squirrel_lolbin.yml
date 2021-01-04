@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Possible Squirrel Packages Manager as Lolbin
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_path.keyword:(*\\update.exe) AND process_command_line.keyword:(*\-\-processStart*.exe* OR *\-\-processStartAndWait*.exe* OR *\-\-createShortcut*.exe*))
+index: logs-endpoint-winevent-security-*
+name: fa4b21c9-0057-4493-b289-2556416ae4d7_0 Squirrel Lolbin
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

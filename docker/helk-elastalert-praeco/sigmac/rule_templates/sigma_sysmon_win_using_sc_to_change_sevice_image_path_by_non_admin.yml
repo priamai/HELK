@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detection of sc.exe utility spawning by user with Medium integrity level to change service ImagePath or FailureCommand
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:*\\sc.exe AND IntegrityLevel:"Medium" AND ((process_command_line.keyword:*config* AND process_command_line.keyword:*binPath*) OR (process_command_line.keyword:*failure* AND process_command_line.keyword:*command*)))
+index: logs-endpoint-winevent-sysmon-*
+name: d937b75f-a665-4480-88a5-2f20e9f9b22a_0 Possible Privilege Escalation via Weak Service Permissions
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

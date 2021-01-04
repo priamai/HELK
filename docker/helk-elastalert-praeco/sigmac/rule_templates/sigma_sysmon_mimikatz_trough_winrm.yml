@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects usage of mimikatz through WinRM protocol by monitoring access to lsass process by wsmprovhost.exe.
+filter:
+- query:
+    query_string:
+      query: (target_process_path:"C\:\\windows\\system32\\lsass.exe" AND process_path:"C\:\\Windows\\system32\\wsmprovhost.exe")
+index: logs-endpoint-winevent-*
+name: aa35a627-33fb-4d04-a165-d33b4afca3e8_0 Mimikatz through Windows Remote Management
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

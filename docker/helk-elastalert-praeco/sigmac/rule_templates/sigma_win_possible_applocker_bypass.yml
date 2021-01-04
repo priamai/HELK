@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects execution of executables that can be used to bypass Applocker whitelisting
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_command_line.keyword:(*\\msdt.exe* OR *\\installutil.exe* OR *\\regsvcs.exe* OR *\\regasm.exe* OR *\\msbuild.exe* OR *\\ieexec.exe*))
+index: logs-endpoint-winevent-security-*
+name: 82a19e3a-2bfe-4a91-8c0d-5d4c98fbb719_0 Possible Applocker Bypass
+priority: 4
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

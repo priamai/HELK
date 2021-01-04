@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects actions caused by the RedMimicry Winnti playbook
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_path.keyword:(*rundll32.exe* OR *cmd.exe*) AND process_command_line.keyword:(*gthread\-3.6.dll* OR *\\Windows\\Temp\\tmp.bat* OR *sigcmm\-2.4.dll*))
+index: logs-endpoint-winevent-*
+name: 95022b85-ff2a-49fa-939a-d7b8f56eeb9b_0 RedMimicry Winnti Playbook Execute
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

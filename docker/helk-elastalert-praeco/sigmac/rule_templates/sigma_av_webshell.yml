@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a highly relevant Antivirus alert that reports a web shell
+filter:
+- query:
+    query_string:
+      query: signature.keyword:(PHP\/Backdoor* OR JSP\/Backdoor* OR ASP\/Backdoor* OR Backdoor.PHP* OR Backdoor.JSP* OR Backdoor.ASP* OR *Webshell*)
+index: logs-*
+name: fdf135a2-9241-4f96-a114-bb404948f736_0 Antivirus Web Shell Detection
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

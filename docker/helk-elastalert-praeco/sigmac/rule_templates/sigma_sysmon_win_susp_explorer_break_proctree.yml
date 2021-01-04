@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a command line process that uses explorer.exe /root, which is similar to cmd.exe /c, only it breaks the process tree and makes its parent a new instance of explorer
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:*explorer.exe* AND process_command_line.keyword:*\ \/root,*)
+index: logs-endpoint-winevent-*
+name: 949f1ffb-6e85-4f00-ae1e-c3c5b190d605_0 Explorer Root Flag Process Tree Break
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

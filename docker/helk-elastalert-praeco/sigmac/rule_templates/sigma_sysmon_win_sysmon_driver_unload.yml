@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detect possible Sysmon driver unload
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:*\\fltmc.exe AND process_command_line.keyword:*unload* AND process_command_line.keyword:*sys*)
+index: logs-endpoint-winevent-sysmon-*
+name: 4d7cda18-1b12-4e52-b45c-d28653210df8_0 Sysmon Driver Unload
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

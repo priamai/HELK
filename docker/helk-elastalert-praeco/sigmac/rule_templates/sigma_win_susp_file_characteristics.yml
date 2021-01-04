@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Executables in the Downloads folder without FileVersion,Description,Product,Company likely created with py2exe
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND file_description:"\?" AND (file_version:"\?" OR file_product:"\?" OR file_company:"\?") AND process_path.keyword:*\\Downloads\\*)
+index: logs-endpoint-winevent-*
+name: 9637e8a5-7131-4f7f-bdc7-2b05d8670c43_0 Suspicious File Characteristics Due to Missing Fields
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

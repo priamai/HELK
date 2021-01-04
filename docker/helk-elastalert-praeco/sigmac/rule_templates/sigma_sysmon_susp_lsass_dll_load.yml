@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a method to load DLL via LSASS process using an undocumented Registry key
+filter:
+- query:
+    query_string:
+      query: registry_key_path.keyword:(*\\CurrentControlSet\\Services\\NTDS\\DirectoryServiceExtPt* OR *\\CurrentControlSet\\Services\\NTDS\\LsaDbExtPt*)
+index: logs-endpoint-winevent-*
+name: b3503044-60ce-4bf4-bbcb-e3db98788823_0 DLL Load via LSASS
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects command line parameters used by Rubeus hack tool
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:(*\ asreproast\ * OR *\ dump\ \/service\:krbtgt\ * OR *\ kerberoast\ * OR *\ createnetonly\ \/program\:* OR *\ ptt\ \/ticket\:* OR *\ \/impersonateuser\:* OR *\ renew\ \/ticket\:* OR *\ asktgt\ \/user\:* OR *\ harvest\ \/interval\:*))
+index: logs-endpoint-winevent-*
+name: 7ec2c172-dceb-4c10-92c9-87c1881b7e18_0 Rubeus Hack Tool
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

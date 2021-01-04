@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects changes to HKCU:\Software\Classes\exefile\shell\runas\command\isolatedCommand
+filter:
+- query:
+    query_string:
+      query: registry_key_path.keyword:HKU\\*_Classes\\exefile\\shell\\runas\\command\\isolatedCommand
+index: logs-endpoint-winevent-*
+name: 5b872a46-3b90-45c1-8419-f675db8053aa_0 UAC Bypass via Sdclt
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

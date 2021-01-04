@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a JAVA process running with remote debugging allowing more than just localhost to connect
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:*transport\=dt_socket,address\=* AND (NOT (process_command_line.keyword:*address\=127.0.0.1* OR process_command_line.keyword:*address\=localhost*)))
+index: logs-endpoint-winevent-sysmon-*
+name: 8f88e3f6-2a49-48f5-a5c4-2f7eedf78710_0 Java Running with Remote Debugging
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

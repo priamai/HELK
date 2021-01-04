@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious process related to rasdial.exe
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_path.keyword:(*rasdial.exe))
+index: logs-endpoint-winevent-security-*
+name: 6bba49bf-7f8c-47d6-a1bb-6b4dece4640e_0 Suspicious RASdial Activity
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Well-known DNS Exfiltration tools execution
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND (process_path.keyword:*\\iodine.exe OR process_path.keyword:*\\dnscat2*))
+index: logs-endpoint-winevent-security-*
+name: 98a96a5a-64a0-4c42-92c5-489da3866cb0_0 DNS Exfiltration and Tunneling Tools Execution
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

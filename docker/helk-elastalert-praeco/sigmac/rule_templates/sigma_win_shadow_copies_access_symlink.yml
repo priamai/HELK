@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Shadow Copies storage symbolic link creation using operating systems utilities
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_command_line.keyword:*mklink* AND process_command_line.keyword:*HarddiskVolumeShadowCopy*)
+index: logs-endpoint-winevent-security-*
+name: 40b19fa6-d835-400c-b301-41f3a2baacaf_0 Shadow Copies Access via Symlink
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

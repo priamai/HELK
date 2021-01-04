@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects capture a network trace via netsh.exe trace functionality
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:*netsh* AND process_command_line.keyword:*trace* AND process_command_line.keyword:*start*)
+index: logs-endpoint-winevent-*
+name: d3c3861d-c504-4c77-ba55-224ba82d0118_0 Capture a Network Trace with netsh.exe
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

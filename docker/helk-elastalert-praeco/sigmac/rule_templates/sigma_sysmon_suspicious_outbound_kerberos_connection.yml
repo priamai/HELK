@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious outbound network activity via kerberos default port indicating possible lateral movement or first stage PrivEsc via delegation.
+filter:
+- query:
+    query_string:
+      query: ((dst_port:"88" AND Initiated:"true") AND (NOT (process_path.keyword:(*\\lsass.exe OR *\\opera.exe OR *\\chrome.exe OR *\\firefox.exe))))
+index: logs-endpoint-winevent-*
+name: e54979bd-c5f9-4d6c-967b-a04b19ac4c74_0 Suspicious Outbound Kerberos Connection 02
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the use of Ditsnap tool. Seems to be a tool for ransomware groups.
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_path.keyword:(*\\ditsnap.exe) OR process_command_line.keyword:(*ditsnap.exe*)))
+index: logs-endpoint-winevent-*
+name: d3b70aad-097e-409c-9df2-450f80dc476b_0 DIT Snapshot Viewer Use
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

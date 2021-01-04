@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Archer malware invocation via rundll32
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:*\\rundll32.exe\ *,InstallArcherSvc)
+index: logs-endpoint-winevent-sysmon-*
+name: 3d4aebe0-6d29-45b2-a8a4-3dfde586a26d_0 Fireball Archer Install
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

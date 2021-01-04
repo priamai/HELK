@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a dump file written by QuarksPwDump password dumper
+filter:
+- query:
+    query_string:
+      query: file_name.keyword:*\\AppData\\Local\\Temp\\SAM\-*.dmp*
+index: logs-endpoint-winevent-*
+name: 847def9e-924d-4e90-b7c4-5f581395a2b4_0 QuarksPwDump Dump File
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

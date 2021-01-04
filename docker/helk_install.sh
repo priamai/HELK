@@ -359,12 +359,20 @@ build_helk() {
   export ADVERTISED_LISTENER=$HOST_IP
 
   echo "$HELK_INFO_TAG Building & running HELK from $COMPOSE_CONFIG file.."
-  docker-compose -f $COMPOSE_CONFIG up --build -d >>$LOGFILE 2>&1
+  docker-compose -f $COMPOSE_CONFIG build --no-cache >>$LOGFILE 2>&1
+  docker-compose -f $COMPOSE_CONFIG up --remove-orphans -d >>$LOGFILE 2>&1
   ERROR=$?
   if [ $ERROR -ne 0 ]; then
     echoerror "Could not run HELK via docker-compose file $COMPOSE_CONFIG (Error Code: $ERROR)."
     exit 1
   fi
+}
+# *********** Configure Praeco ***************
+config_praeco() {
+echo "Setting permissions for praeco rules and templates folders"
+chmod -R 777 ./helk-elastalert-praeco/rules
+chmod -R 777 ./helk-elastalert-praeco/rule_templates
+echo " "
 }
 
 # *********** Asking user for docker compose config ***************
@@ -580,6 +588,7 @@ install_helk() {
   check_min_requirements
   check_system_info
   set_helk_build
+  config_praeco
   set_network
   set_kibana_ui_password
   prepare_helk

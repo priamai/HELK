@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects execution of ntdsutil.exe, which can be used for various attacks against the NTDS database (NTDS.DIT)
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_command_line.keyword:*\\ntdsutil*)
+index: logs-endpoint-winevent-*
+name: 2afafd61-6aae-4df4-baed-139fa1f4c345_0 Invocation of Active Directory Diagnostic Tool (ntdsutil.exe)
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

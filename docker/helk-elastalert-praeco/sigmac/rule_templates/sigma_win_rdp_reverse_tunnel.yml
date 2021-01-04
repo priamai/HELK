@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects svchost hosting RDP termsvcs communicating with the loopback address
+filter:
+- query:
+    query_string:
+      query: (event_id:"5156" AND ((src_port:"3389" AND DestinationAddress.keyword:(127.* OR \:\:1)) OR (dst_port:"3389" AND src_ip_addr.keyword:(127.* OR \:\:1))))
+index: logs-endpoint-winevent-security-*
+name: 5bed80b6-b3e8-428e-a3ae-d3c757589e41_0 RDP over Reverse SSH Tunnel WFP
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

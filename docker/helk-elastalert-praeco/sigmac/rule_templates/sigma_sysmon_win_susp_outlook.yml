@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects EnableUnsafeClientMailRules used for Script Execution from Outlook
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_command_line.keyword:*EnableUnsafeClientMailRules* OR (process_parent_path.keyword:*\\outlook.exe AND process_command_line.keyword:\\\\*\\*.exe)))
+index: logs-endpoint-winevent-*
+name: e212d415-0e93-435f-9e1a-f29005bb4723_0 Suspicious Execution from Outlook
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Base64 encoded Shellcode
+filter:
+- query:
+    query_string:
+      query: ((event_id:"4104" AND "*AAAAYInlM*") AND \*.keyword:(*OiCAAAAYInlM* OR *OiJAAAAYInlM*))
+index: logs-endpoint-winevent-*
+name: 16b37b70-6fcf-4814-a092-c36bd3aafcbd_0 PowerShell ShellCode
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

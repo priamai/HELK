@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Potential adversaries stopping ETW providers recording loaded .NET assemblies.
+filter:
+- query:
+    query_string:
+      query: (registry_key_path.keyword:*SOFTWARE\\Microsoft\\.NETFramework\\ETWEnabled AND Details:"DWORD\ \(0x00000000\)")
+index: logs-endpoint-winevent-*
+name: bf4fc428-dcc3-4bbd-99fe-2422aeee2544_0 COMPlus_ETWEnabled Registry Modification
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Silence empireDNSagent
+filter:
+- query:
+    query_string:
+      query: (ScriptBlockText.keyword:*System.Diagnostics.Process* AND ScriptBlockText.keyword:*Stop\-Computer* AND ScriptBlockText.keyword:*Restart\-Computer* AND ScriptBlockText.keyword:*Exception\ in\ execution* AND ScriptBlockText.keyword:*$cmdargs* AND ScriptBlockText.keyword:*Close\-Dnscat2Tunnel* AND ScriptBlockText.keyword:*set\ type\=$LookupType`nserver* AND ScriptBlockText.keyword:*$Command\ |\ nslookup\ 2>&1\ |\ Out\-String* AND ScriptBlockText.keyword:*New\-RandomDNSField* AND ScriptBlockText.keyword:*\[Convert\]\:\:ToString\($SYNOptions,\ 16\)* AND ScriptBlockText.keyword:*$Session.Dead\ \=\ $True* AND ScriptBlockText.keyword:*$Session\[\"Driver\"\]\ \-eq*)
+index: logs-endpoint-winevent-powershell-*
+name: 3ceb2083-a27f-449a-be33-14ec1b7cc973_0 Silence.EDA Detection
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

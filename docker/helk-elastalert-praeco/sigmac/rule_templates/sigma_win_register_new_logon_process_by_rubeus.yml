@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects potential use of Rubeus via registered new trusted logon process
+filter:
+- query:
+    query_string:
+      query: (event_id:"4611" AND logon_process_name:"User32LogonProcesss")
+index: logs-endpoint-winevent-security-*
+name: 12e6d621-194f-4f59-90cc-1959e21e69f7_0 Register new Logon Process by Rubeus
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects COM object hijacking via TreatAs subkey
+filter:
+- query:
+    query_string:
+      query: (event_category_type:"CreateKey" AND registry_key_path.keyword:HKU\\*_Classes\\CLSID\\*\\TreatAs)
+index: logs-endpoint-winevent-*
+name: 9b0f8a61-91b2-464f-aceb-0527e0a45020_0 Windows Registry Persistence COM Key Linking
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

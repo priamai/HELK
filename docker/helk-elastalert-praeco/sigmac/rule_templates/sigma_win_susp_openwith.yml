@@ -1,0 +1,16 @@
+alert:
+- debug
+description: The OpenWith.exe executes other binary
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_path.keyword:*\\OpenWith.exe AND process_command_line.keyword:*\/c*)
+index: logs-endpoint-winevent-security-*
+name: cec8e918-30f7-4e2d-9bfa-a59cc97ae60f_0 OpenWith.exe Executes Specified Binary
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Service Principal Name Enumeration used for Kerberoasting
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND (process_path.keyword:*\\setspn.exe OR file_description.keyword:*Query\ or\ reset\ the\ computer*\ SPN\ attribute*) AND process_command_line.keyword:*\-q*)
+index: logs-endpoint-winevent-*
+name: 1eeed653-dbc8-4187-ad0c-eeebb20e6599_0 Possible SPN Enumeration
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

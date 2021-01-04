@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious network connection by Notepad
+filter:
+- query:
+    query_string:
+      query: (process_path.keyword:*\\notepad.exe AND (NOT (dst_port:"9100")))
+index: logs-endpoint-winevent-*
+name: e81528db-fc02-45e8-8e98-4e84aba1f10b_0 Notepad Making Network Connection
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

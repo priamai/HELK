@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects process LSASS memory dump using procdump or taskmgr based on the CallTrace pointing to dbghelp.dll or dbgcore.dll for win10
+filter:
+- query:
+    query_string:
+      query: (target_process_path:"C\:\\windows\\system32\\lsass.exe" AND process_granted_access:"0x1fffff" AND process_call_trace.keyword:(*dbghelp.dll* OR *dbgcore.dll*))
+index: logs-endpoint-winevent-*
+name: 5ef9853e-4d0e-4a70-846f-a9ca37d876da_0 LSASS Memory Dump
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

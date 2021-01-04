@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a suspicious program execution in Outlook temp folder
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_path.keyword:*\\Temporary\ Internet\ Files\\Content.Outlook\\*)
+index: logs-endpoint-winevent-*
+name: a018fdc3-46a3-44e5-9afb-2cd4af1d4b39_0 Execution in Outlook Temp Folder
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects wmiprvse spawning processes
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_parent_path.keyword:*\\WmiPrvSe.exe AND (NOT (LogonId:"0x3e7" OR user_account:"NT\ AUTHORITY\\SYSTEM")))
+index: logs-endpoint-winevent-sysmon-*
+name: d21374ff-f574-44a7-9998-4a8c8bf33d7d_0 Wmiprvse Spawning Process
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

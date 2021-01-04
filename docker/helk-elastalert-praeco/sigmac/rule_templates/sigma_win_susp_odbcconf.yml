@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects defence evasion attempt via odbcconf.exe execution to load DLL
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND ((process_path.keyword:*\\odbcconf.exe AND process_command_line.keyword:(*\-f* OR *regsvr*)) OR (process_parent_path.keyword:*\\odbcconf.exe AND process_path.keyword:*\\rundll32.exe)))
+index: logs-endpoint-winevent-security-*
+name: 65d2be45-8600-4042-b4c0-577a1ff8a60e_0 Application Whitelisting Bypass via DLL Loaded by odbcconf.exe
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

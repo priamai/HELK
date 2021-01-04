@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects external diskdrives or plugged in USB devices
+filter:
+- query:
+    query_string:
+      query: ((event_id:("6416") AND DeviceClassName:"DiskDrive") OR DeviceDescription:"USB\ Mass\ Storage\ Device")
+index: logs-endpoint-winevent-security-*
+name: f69a87ea-955e-4fb4-adb2-bb9fd6685632_0 External Disk Drive or USB Storage Device
+priority: 4
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

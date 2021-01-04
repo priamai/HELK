@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the creation of scheduled tasks in user session
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_path.keyword:*\\schtasks.exe AND process_command_line.keyword:*\ \/create\ *) AND (NOT (user_account:"NT\ AUTHORITY\\SYSTEM")))
+index: logs-endpoint-winevent-sysmon-*
+name: 92626ddd-662c-49e3-ac59-f6535f12d189_0 Scheduled Task Creation
+priority: 4
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

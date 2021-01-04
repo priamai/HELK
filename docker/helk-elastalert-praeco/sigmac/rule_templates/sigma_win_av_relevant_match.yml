@@ -1,0 +1,16 @@
+alert:
+- debug
+description: This detection method points out highly relevant Antivirus events
+filter:
+- query:
+    query_string:
+      query: (Message.keyword:(*HTool* OR *Hacktool* OR *ASP\/Backdoor* OR *JSP\/Backdoor* OR *PHP\/Backdoor* OR *Backdoor.ASP* OR *Backdoor.JSP* OR *Backdoor.PHP* OR *Webshell* OR *Portscan* OR *Mimikatz* OR *WinCred* OR *PlugX* OR *Korplug* OR *Pwdump* OR *Chopper* OR *WmiExec* OR *Xscan* OR *Clearlog* OR *ASPXSpy*) AND (NOT (Message.keyword:(*Keygen* OR *Crack*))))
+index: logs-endpoint-winevent-*
+name: 78bc5783-81d9-4d73-ac97-59f6db4f72a8_0 Relevant Anti-Virus Event
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

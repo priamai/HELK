@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Access to Domain Group Policies stored in SYSVOL
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:*\\SYSVOL\\*\\policies\\*)
+index: logs-endpoint-winevent-sysmon-*
+name: 05f3c945-dcc8-4393-9f3d-af65077a8f86_0 Suspicious SYSVOL Domain Group Policy Access
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

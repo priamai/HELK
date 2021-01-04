@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects possible SafetyKatz Behaviour
+filter:
+- query:
+    query_string:
+      query: file_name.keyword:*\\Temp\\debug.bin
+index: logs-endpoint-winevent-*
+name: e074832a-eada-4fd7-94a1-10642b130e16_0 Detection of SafetyKatz
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

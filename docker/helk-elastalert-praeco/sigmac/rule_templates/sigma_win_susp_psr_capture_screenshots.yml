@@ -1,0 +1,16 @@
+alert:
+- debug
+description: The psr.exe captures desktop screenshots and saves them on the local machine
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_path.keyword:*\\Psr.exe AND process_command_line.keyword:*\/start*)
+index: logs-endpoint-winevent-security-*
+name: 2158f96f-43c2-43cb-952a-ab4580f32382_0 Psr.exe Capture Screenshots
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

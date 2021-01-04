@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects commands used by Turla group as reported by ESET in May 2020
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_command_line.keyword:(*tracert\ \-h\ 10\ yahoo.com* OR *.WSqmCons\)\)|iex;* OR *Fr`omBa`se6`4Str`ing*) OR (process_command_line.keyword:*net\ use\ https\:\/\/docs.live.net* AND process_command_line.keyword:*@aol.co.uk*)))
+index: logs-endpoint-winevent-sysmon-*
+name: 9e2e51c5-c699-4794-ba5a-29f5da40ac0c_0 Turla Group Commands May 2020
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

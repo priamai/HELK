@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects execution of PowerShell
+filter:
+- query:
+    query_string:
+      query: (file_description:"system.management.automation" AND ImageLoaded.keyword:*system.management.automation*)
+index: logs-endpoint-winevent-*
+name: 867613fb-fa60-4497-a017-a82df74a172c_0 PowerShell Execution
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the use of getsystem Meterpreter/Cobalt Strike command by detecting a specific service starting
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_parent_path.keyword:*\\services.exe AND ((process_command_line.keyword:*cmd* AND process_command_line.keyword:*\/c* AND process_command_line.keyword:*echo* AND process_command_line.keyword:*\\pipe\\*) OR (process_command_line.keyword:*%COMSPEC%* AND process_command_line.keyword:*\/c* AND process_command_line.keyword:*echo* AND process_command_line.keyword:*\\pipe\\*) OR (process_command_line.keyword:*rundll32* AND process_command_line.keyword:*.dll,a* AND process_command_line.keyword:*\/p\:*))) AND (NOT (process_command_line.keyword:*MpCmdRun*)))
+index: logs-endpoint-winevent-sysmon-*
+name: 15619216-e993-4721-b590-4c520615a67d_0 Meterpreter or Cobalt Strike Getsystem Service Start
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

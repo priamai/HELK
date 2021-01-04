@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Possible webshell file creation on a static web site
+filter:
+- query:
+    query_string:
+      query: ((((file_name.keyword:*\\inetpub\\wwwroot\\* AND file_name.keyword:(*.asp* OR *.ashx* OR *.ph*)) AND (NOT (file_name.keyword:(*\\AppData\\Local\\Temp\\* OR *\\Windows\\Temp\\*)))) OR ((file_name.keyword:(*\\www\\* OR *\\htdocs\\* OR *\\html\\*) AND file_name.keyword:*.ph*) AND (NOT (file_name.keyword:(*\\AppData\\Local\\Temp\\* OR *\\Windows\\Temp\\*))))) OR ((file_name.keyword:*.jsp OR (file_name.keyword:*\\cgi\-bin\\* AND file_name.keyword:*.pl*)) AND (NOT (file_name.keyword:(*\\AppData\\Local\\Temp\\* OR *\\Windows\\Temp\\*)))))
+index: logs-endpoint-winevent-*
+name: 39f1f9f2-9636-45de-98f6-a4046aa8e4b9_0 Windows Webshell Creation
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

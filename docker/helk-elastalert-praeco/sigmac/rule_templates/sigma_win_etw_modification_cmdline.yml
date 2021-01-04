@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Potential adversaries stopping ETW providers recording loaded .NET assemblies.
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_command_line.keyword:*COMPlus_ETWEnabled\=0*)
+index: logs-endpoint-winevent-security-*
+name: 41421f44-58f9-455d-838a-c398859841d4_0 COMPlus_ETWEnabled Command Line Arguments
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

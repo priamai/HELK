@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a flag anomaly in which regsvr32.exe uses a /i flag without using a /n flag at the same time
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_path.keyword:*\\regsvr32.exe AND process_command_line.keyword:*\ \/i\:*) AND (NOT (process_command_line.keyword:*\ \/n\ *)))
+index: logs-endpoint-winevent-*
+name: b236190c-1c61-41e9-84b3-3fe03f6d76b0_0 Regsvr32 Flags Anomaly
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

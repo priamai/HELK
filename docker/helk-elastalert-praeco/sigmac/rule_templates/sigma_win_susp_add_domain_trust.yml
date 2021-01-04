@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Addition of domains is seldom and should be verified for legitimacy.
+filter:
+- query:
+    query_string:
+      query: event_id:"4706"
+index: logs-endpoint-winevent-security-*
+name: 0255a820-e564-4e40-af2b-6ac61160335c_0 Addition of Domain Trusts
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

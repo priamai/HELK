@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects certain command line parameters often used during reconnaissance activity via web shells
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_parent_path.keyword:(*\\apache* OR *\\tomcat* OR *\\w3wp.exe OR *\\php\-cgi.exe OR *\\nginx.exe OR *\\httpd.exe) AND process_command_line.keyword:(*whoami* OR *net\ user\ * OR *ping\ \-n\ * OR *systeminfo OR *&cd&echo* OR *cd\ \/d*))
+index: logs-endpoint-winevent-sysmon-*
+name: bed2a484-9348-4143-8a8a-b801c979301c_0 Webshell Detection With Command Line Keywords
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

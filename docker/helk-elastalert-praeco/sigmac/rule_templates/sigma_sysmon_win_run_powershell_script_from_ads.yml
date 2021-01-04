@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects PowerShell script execution from Alternate Data Stream (ADS)
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_parent_path.keyword:*\\powershell.exe AND process_path.keyword:*\\powershell.exe AND process_command_line.keyword:*Get\-Content* AND process_command_line.keyword:*\-Stream*)
+index: logs-endpoint-winevent-sysmon-*
+name: 45a594aa-1fbd-4972-a809-ff5a99dd81b8_0 Run PowerShell Script from ADS
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

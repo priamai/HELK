@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects executables launched outside their default directories as used by Lazarus Group (Bluenoroff)
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_path.keyword:(*\\mstdc.exe OR *\\gpvc.exe) AND (NOT (process_path.keyword:(C\:\\Windows\\System32\\* OR C\:\\Windows\\SysWOW64\\*))))
+index: logs-endpoint-winevent-*
+name: 3f7f5b0b-5b16-476c-a85f-ab477f6dd24b_0 Lazarus Session Highjacker
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

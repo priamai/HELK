@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a whoami.exe executed by LOCAL SYSTEM. This may be a sign of a successful local privilege escalation.
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND user_account:"NT\ AUTHORITY\\SYSTEM" AND process_path.keyword:*\\whoami.exe)
+index: logs-endpoint-winevent-*
+name: 80167ada-7a12-41ed-b8e9-aa47195c66a1_0 Run Whoami as SYSTEM
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

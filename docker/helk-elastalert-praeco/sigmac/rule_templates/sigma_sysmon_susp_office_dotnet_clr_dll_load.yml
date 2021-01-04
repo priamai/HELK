@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects CLR DLL being loaded by an Office Product
+filter:
+- query:
+    query_string:
+      query: (process_path.keyword:(*\\winword.exe OR *\\powerpnt.exe OR *\\excel.exe OR *\\outlook.exe) AND ImageLoaded.keyword:(*\\clr.dll*))
+index: logs-endpoint-winevent-*
+name: d13c43f0-f66b-4279-8b2c-5912077c1780_0 CLR DLL Loaded Via Office Applications
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

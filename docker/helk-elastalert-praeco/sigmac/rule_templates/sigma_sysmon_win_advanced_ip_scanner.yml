@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the use of Advanced IP Scanner. Seems to be a popular tool for ransomware groups.
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:*\\advanced_ip_scanner*)
+index: logs-endpoint-winevent-*
+name: bef37fa2-f205-4a7b-b484-0759bfd5f86f_0 Advanced IP Scanner
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

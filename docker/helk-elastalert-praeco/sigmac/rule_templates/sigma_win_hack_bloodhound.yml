@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects command line parameters used by Bloodhound and Sharphound hack tools
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND (process_path.keyword:(*\\Bloodhound.exe* OR *\\SharpHound.exe*) OR process_command_line.keyword:(*\ \-CollectionMethod\ All\ * OR *.exe\ \-c\ All\ \-d\ * OR *Invoke\-Bloodhound* OR *Get\-BloodHoundData*) OR (process_command_line.keyword:*\ \-JsonFolder\ * AND process_command_line.keyword:*\ \-ZipFileName\ *) OR (process_command_line.keyword:*\ DCOnly\ * AND process_command_line.keyword:*\ \-\-NoSaveCache\ *)))
+index: logs-endpoint-winevent-security-*
+name: f376c8a7-a2d0-4ddc-aa0c-16c17236d962_0 Bloodhound and Sharphound Hack Tool
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

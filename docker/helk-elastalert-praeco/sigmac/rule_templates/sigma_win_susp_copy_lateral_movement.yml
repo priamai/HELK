@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a suspicious copy command from a remote C$ or ADMIN$ share
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_command_line.keyword:(*copy\ *\\c$* OR *copy\ *\\ADMIN$*))
+index: logs-endpoint-winevent-*
+name: 855bc8b5-2ae8-402e-a9ed-b889e6df1900_0 Copy from Admin Share
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects WMI spawning PowerShell
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_parent_path.keyword:(*\\wmiprvse.exe) AND process_path.keyword:(*\\powershell.exe))
+index: logs-endpoint-winevent-sysmon-*
+name: 692f0bec-83ba-4d04-af7e-e884a96059b6_0 WMI Spawning Windows PowerShell
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

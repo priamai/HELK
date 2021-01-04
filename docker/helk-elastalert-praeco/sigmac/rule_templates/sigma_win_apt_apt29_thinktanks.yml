@@ -1,0 +1,16 @@
+alert:
+- debug
+description: This method detects a suspicious powershell command line combination as used by APT29 in a campaign against US think tanks
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_command_line.keyword:*\-noni\ \-ep\ bypass\ $*)
+index: logs-endpoint-winevent-*
+name: 033fe7d6-66d1-4240-ac6b-28908009c71f_0 APT29
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

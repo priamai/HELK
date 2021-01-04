@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Registry modifcations performaed by Ke3chang malware in campaigns running in 2019 and 2020
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:(*\-Property\ DWORD\ \-name\ DisableFirstRunCustomize\ \-value\ 2\ \-Force* OR *\-Property\ String\ \-name\ Check_Associations\ \-value* OR *\-Property\ DWORD\ \-name\ IEHarden\ \-value\ 0\ \-Force*))
+index: logs-endpoint-winevent-*
+name: 7b544661-69fc-419f-9a59-82ccc328f205_0 Ke3chang Registry Key Modifications
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

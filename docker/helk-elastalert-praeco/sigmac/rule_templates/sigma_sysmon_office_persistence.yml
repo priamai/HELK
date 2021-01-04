@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects add-ins that load when Microsoft Word or Excel starts (.wll/.xll are simply .dll fit for Word or Excel).
+filter:
+- query:
+    query_string:
+      query: (event_id:"11" AND (((file_name.keyword:*\\Microsoft\\Word\\Startup\\* AND file_name.keyword:*.wll) OR (file_name.keyword:*\\Microsoft\\Excel\\Startup\\* AND file_name.keyword:*.xll)) OR (file_name.keyword:*\\Microsoft\\Addins\\* AND file_name.keyword:(*.xlam OR *.xla))))
+index: logs-endpoint-winevent-sysmon-*
+name: 8e1cb247-6cf6-42fa-b440-3f27d57e9936_0 Microsoft Office Add-In Loading
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

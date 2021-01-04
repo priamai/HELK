@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects creation or execution of UserInitMprLogonScript persistence method
+filter:
+- query:
+    query_string:
+      query: registry_key_path.keyword:*UserInitMprLogonScript*
+index: logs-endpoint-winevent-*
+name: 9ace0707-b560-49b8-b6ca-5148b42f39fb_0 Logon Scripts (UserInitMprLogonScript) Registry
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

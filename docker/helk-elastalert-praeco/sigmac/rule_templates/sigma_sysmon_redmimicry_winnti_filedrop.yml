@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects actions caused by the RedMimicry Winnti playbook
+filter:
+- query:
+    query_string:
+      query: file_name.keyword:(*gthread\-3.6.dll* OR *sigcmm\-2.4.dll* OR *\\Windows\\Temp\\tmp.bat*)
+index: logs-endpoint-winevent-*
+name: 130c9e58-28ac-4f83-8574-0a4cc913b97e_0 RedMimicry Winnti Playbook Dropped File
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

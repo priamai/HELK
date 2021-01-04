@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a code page switch in command line or batch scripts to a rare language
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:(chcp*\ 936 OR chcp*\ 1258))
+index: logs-endpoint-winevent-sysmon-*
+name: c7942406-33dd-4377-a564-0f62db0593a3_0 Suspicious Code Page Switch
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

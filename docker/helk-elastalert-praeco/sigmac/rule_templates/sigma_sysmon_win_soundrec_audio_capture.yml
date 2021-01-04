@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detect attacker collecting audio via SoundRecorder application
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:*\\SoundRecorder.exe AND process_command_line.keyword:*\/FILE*)
+index: logs-endpoint-winevent-*
+name: 83865853-59aa-449e-9600-74b9d89a6d6e_0 Audio Capture via SoundRecorder
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

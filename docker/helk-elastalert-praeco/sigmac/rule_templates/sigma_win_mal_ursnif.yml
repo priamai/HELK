@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects new registry key created by Ursnif malware.
+filter:
+- query:
+    query_string:
+      query: (event_id:"13" AND registry_key_path.keyword:*\\Software\\AppDataLow\\Software\\Microsoft\\*)
+index: logs-endpoint-winevent-*
+name: 21f17060-b282-4249-ade0-589ea3591558_0 Ursnif
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

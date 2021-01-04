@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects WMI script event consumers
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_path:"C\:\\WINDOWS\\system32\\wbem\\scrcons.exe" AND process_parent_path:"C\:\\Windows\\System32\\svchost.exe")
+index: logs-endpoint-winevent-security-*
+name: ec1d5e28-8f3b-4188-a6f8-6e8df81dc28e_0 WMI Persistence - Script Event Consumer
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

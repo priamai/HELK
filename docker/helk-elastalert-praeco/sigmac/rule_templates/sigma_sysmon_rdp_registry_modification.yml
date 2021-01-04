@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects potential malicious modification of the property value of fDenyTSConnections and UserAuthentication to enable remote desktop connections.
+filter:
+- query:
+    query_string:
+      query: (registry_key_path.keyword:(*\\CurrentControlSet\\Control\\Terminal\ Server\\WinStations\\RDP\-Tcp\\UserAuthentication OR *\\CurrentControlSet\\Control\\Terminal\ Server\\fDenyTSConnections) AND Details:"DWORD\ \(0x00000000\)")
+index: logs-endpoint-winevent-*
+name: 41904ebe-d56c-4904-b9ad-7a77bdf154b3_0 RDP Registry Modification
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

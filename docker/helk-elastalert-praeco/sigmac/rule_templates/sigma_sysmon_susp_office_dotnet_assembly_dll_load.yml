@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects any assembly DLL being loaded by an Office Product
+filter:
+- query:
+    query_string:
+      query: (process_path.keyword:(*\\winword.exe OR *\\powerpnt.exe OR *\\excel.exe OR *\\outlook.exe) AND ImageLoaded.keyword:(C\:\\Windows\\assembly\\*))
+index: logs-endpoint-winevent-*
+name: ff0f2b05-09db-4095-b96d-1b75ca24894a_0 dotNET DLL Loaded Via Office Applications
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

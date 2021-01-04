@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects alternate PowerShell hosts potentially bypassing detections looking for powershell.exe
+filter:
+- query:
+    query_string:
+      query: ((event_id:"17" AND pipe_name.keyword:\\PSHost*) AND (NOT (process_path.keyword:(*\\powershell.exe OR *\\powershell_ise.exe))))
+index: logs-endpoint-winevent-sysmon-*
+name: 58cb02d5-78ce-4692-b3e1-dce850aae41a_0 Alternate PowerShell Hosts Pipe
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

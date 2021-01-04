@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Identifies use of Fodhelper.exe to bypass User Account Control. Adversaries use this technique to execute privileged processes.
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_parent_path.keyword:*\\fodhelper.exe)
+index: logs-endpoint-winevent-*
+name: 7f741dcf-fc22-4759-87b4-9ae8376676a2_0 Bypass UAC via Fodhelper.exe
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

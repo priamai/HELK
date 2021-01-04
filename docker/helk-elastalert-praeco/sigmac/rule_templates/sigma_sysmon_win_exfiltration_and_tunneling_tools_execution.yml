@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Execution of well known tools for data exfiltration and tunneling
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:(*\\plink.exe OR *\\socat.exe OR *\\stunnel.exe OR *\\httptunnel.exe))
+index: logs-endpoint-winevent-sysmon-*
+name: c75309a3-59f8-4a8d-9c2c-4c927ad50555_0 Exfiltration and Tunneling Tools Execution
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

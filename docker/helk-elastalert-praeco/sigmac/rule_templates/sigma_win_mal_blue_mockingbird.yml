@@ -1,0 +1,46 @@
+alert:
+- debug
+description: Attempts to detect system changes made by Blue Mockingbird
+filter:
+- query:
+    query_string:
+      query: (process_path.keyword:*\\cmd.exe AND process_command_line.keyword:*sc\ config* AND process_command_line.keyword:*wercplsupporte.dll*)
+index: logs-endpoint-winevent-*
+name: c3198a27-23a0-4c2c-af19-e5328d49680e_0 Blue Mockingbird
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+alert:
+- debug
+description: Attempts to detect system changes made by Blue Mockingbird
+filter:
+- query:
+    query_string:
+      query: (process_path.keyword:*\\wmic.exe AND process_command_line.keyword:*COR_PROFILER)
+index: logs-endpoint-winevent-*
+name: c3198a27-23a0-4c2c-af19-e5328d49680e-2_0 Blue Mockingbird
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+alert:
+- debug
+description: Attempts to detect system changes made by Blue Mockingbird
+filter:
+- query:
+    query_string:
+      query: (event_id:"13" AND registry_key_path.keyword:(*\\CurrentControlSet\\Services\\wercplsupport\\Parameters\\ServiceDll))
+index: logs-endpoint-winevent-*
+name: c3198a27-23a0-4c2c-af19-e5328d49680e-3_0 Blue Mockingbird
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

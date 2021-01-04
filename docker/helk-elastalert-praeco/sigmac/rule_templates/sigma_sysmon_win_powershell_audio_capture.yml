@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects audio capture via PowerShell Cmdlet
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:*WindowsAudioDevice\-Powershell\-Cmdlet*)
+index: logs-endpoint-winevent-sysmon-*
+name: 932fb0d8-692b-4b0f-a26e-5643a50fe7d6_0 Audio Capture via PowerShell
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

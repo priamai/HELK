@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious powershell process starts with base64 encoded commands (e.g. Emotet)
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:(*\ \-e\ JAB* OR *\ \-e\ \ JAB* OR *\ \-e\ \ \ JAB* OR *\ \-e\ \ \ \ JAB* OR *\ \-e\ \ \ \ \ JAB* OR *\ \-e\ \ \ \ \ \ JAB* OR *\ \-en\ JAB* OR *\ \-enc\ JAB* OR *\ \-enc*\ JAB* OR *\ \-w\ hidden\ \-e*\ JAB* OR *\ BA\^J\ e\- OR *\ \-e\ SUVYI* OR *\ \-e\ aWV4I* OR *\ \-e\ SQBFAFgA* OR *\ \-e\ aQBlAHgA* OR *\ \-enc\ SUVYI* OR *\ \-enc\ aWV4I* OR *\ \-enc\ SQBFAFgA* OR *\ \-enc\ aQBlAHgA*) AND (NOT (process_command_line.keyword:*\ \-ExecutionPolicy\ remotesigned\ *)))
+index: logs-endpoint-winevent-sysmon-*
+name: ca2092a1-c273-4878-9b4b-0d60115bf5ea_0 Suspicious Encoded PowerShell Command Line
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Ryuk Ransomware command lines
+filter:
+- query:
+    query_string:
+      query: process_command_line.keyword:(*\\net.exe\ stop\ \"samss\"\ * OR *\\net.exe\ stop\ \"audioendpointbuilder\"\ * OR *\\net.exe\ stop\ \"unistoresvc_?????\"\ *)
+index: logs-endpoint-winevent-*
+name: 0acaad27-9f02-4136-a243-c357202edd74_0 Ryuk Ransomware 01
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detect download by BITS jobs via PowerShell
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:*\\powershell.exe AND process_command_line.keyword:*Start\-BitsTransfer*)
+index: logs-endpoint-winevent-*
+name: f67dbfce-93bc-440d-86ad-a95ae8858c90_0 Suspicious Bitsadmin Job via PowerShell
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

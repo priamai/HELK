@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious process injection using ZOHO's dctask64.exe
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:(*\\dctask64.exe) AND (NOT (process_command_line.keyword:(*DesktopCentral_Agent\\agent*))))
+index: logs-endpoint-winevent-*
+name: 6345b048-8441-43a7-9bed-541133633d7a_0 ZOHO Dctask64 Process Injection
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

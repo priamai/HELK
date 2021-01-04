@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects PowerShell Strings applied to rundll as seen in PowerShdll.dll
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND (process_path.keyword:(*\\rundll32.exe) OR file_description.keyword:(*Windows\-Hostprozess\ \(Rundll32\)*)) AND process_command_line.keyword:(*Default.GetString* OR *FromBase64String*))
+index: logs-endpoint-winevent-*
+name: 6812a10b-60ea-420c-832f-dfcc33b646ba_0 Detection of PowerShell Execution via DLL
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

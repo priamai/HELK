@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious msiexec process starts with web addreses as parameter
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:(*\ msiexec*\:\/\/*))
+index: logs-endpoint-winevent-*
+name: f7b5f842-a6af-4da5-9e95-e32478f3cd2f_0 MsiExec Web Install
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

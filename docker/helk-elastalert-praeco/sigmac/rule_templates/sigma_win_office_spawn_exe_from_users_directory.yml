@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects an executable in the users directory started from Microsoft Word, Excel, Powerpoint, Publisher or Visio
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_parent_path.keyword:(*\\WINWORD.EXE OR *\\EXCEL.EXE OR *\\POWERPNT.exe OR *\\MSPUB.exe OR *\\VISIO.exe OR *\\OUTLOOK.EXE) AND process_path.keyword:(C\:\\users\\*.exe))
+index: logs-endpoint-winevent-*
+name: aa3a6f94-890e-4e22-b634-ffdfd54792cc_0 MS Office Product Spawning Exe in User Dir
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

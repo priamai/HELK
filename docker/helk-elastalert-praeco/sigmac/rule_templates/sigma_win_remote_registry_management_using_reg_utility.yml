@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Remote registry management using REG utility from non-admin workstation
+filter:
+- query:
+    query_string:
+      query: ((event_id:"5145" AND share_relative_target_name.keyword:*\\winreg*) AND (NOT (src_original_value:"%Admins_Workstations%")))
+index: logs-endpoint-winevent-*
+name: 68fcba0d-73a5-475e-a915-e8b4c576827e_0 Remote Registry Management Using Reg Utility
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

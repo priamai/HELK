@@ -1,0 +1,16 @@
+alert:
+- debug
+description: This method detects a service install of the malicious Microsoft Network Realtime Inspection Service service described in StoneDrill report by Kaspersky
+filter:
+- query:
+    query_string:
+      query: (event_id:"7045" AND service_name:"NtsSrv" AND service_image_path.keyword:*\ LocalService)
+index: logs-endpoint-winevent-*
+name: 9e987c6c-4c1e-40d8-bd85-dd26fba8fdd6_0 StoneDrill Service Install
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

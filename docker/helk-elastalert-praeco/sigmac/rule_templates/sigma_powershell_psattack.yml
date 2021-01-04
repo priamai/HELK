@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the use of PSAttack PowerShell hack tool
+filter:
+- query:
+    query_string:
+      query: (event_id:"4103" AND "PS\ ATTACK\!\!\!")
+index: logs-endpoint-winevent-*
+name: b7ec41a4-042c-4f31-a5db-d0fcde9fa5c5_0 PowerShell PSAttack
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

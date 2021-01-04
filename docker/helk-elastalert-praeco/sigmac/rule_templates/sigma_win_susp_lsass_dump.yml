@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects process handle on LSASS process with certain access mask and object type SAM_DOMAIN
+filter:
+- query:
+    query_string:
+      query: (event_id:"4656" AND process_path:"C\:\\Windows\\System32\\lsass.exe" AND object_access_mask:"0x705" AND object_type:"SAM_DOMAIN")
+index: logs-endpoint-winevent-*
+name: aa1697b7-d611-4f9a-9cb2-5125b4ccfd5c_0 Password Dumper Activity on LSASS
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

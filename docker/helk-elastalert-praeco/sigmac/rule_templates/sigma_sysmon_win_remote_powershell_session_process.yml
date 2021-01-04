@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects remote PowerShell sections by monitoring for wsmprovhost as a parent or child process (sign of an active ps remote session)
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_path.keyword:*\\wsmprovhost.exe OR process_parent_path.keyword:*\\wsmprovhost.exe))
+index: logs-endpoint-winevent-*
+name: 734f8d9b-42b8-41b2-bcf5-abaf49d5a3c8_0 Remote PowerShell Session 01
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

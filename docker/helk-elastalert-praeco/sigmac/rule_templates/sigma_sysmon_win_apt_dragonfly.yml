@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects CrackMapExecWin Activity as Described by NCSC
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:(*\\crackmapexec.exe))
+index: logs-endpoint-winevent-sysmon-*
+name: 04d9079e-3905-4b70-ad37-6bdf11304965_0 CrackMapExecWin
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

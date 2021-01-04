@@ -221,6 +221,8 @@ services:
       - ./helk-elastalert-praeco/config/api.config.json:/opt/elastalert-server/config/config.json
       - ./helk-elastalert-praeco/rules:/opt/elastalert/rules
       - ./helk-elastalert-praeco/rule_templates:/opt/elastalert/rule_templates
+      - ./helk-elastalert-praeco/pass/smtp_auth_user.yaml:/opt/elastalert/pass/smtp_auth_user.yaml
+      - ./helk-elastalert-praeco/sigmac/rule_templates:/opt/sigma/rule_templates
     healthcheck:
         test: ["CMD-SHELL", "curl -f http://localhost:3030 || exit 1"]
         interval: 30s

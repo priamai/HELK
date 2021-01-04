@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects netsh commands that turns off the Windows firewall
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:(netsh\ firewall\ set\ opmode\ mode\=disable OR netsh\ advfirewall\ set\ *\ state\ off))
+index: logs-endpoint-winevent-sysmon-*
+name: 57c4bf16-227f-4394-8ec7-1b745ee061c3_0 Firewall Disabled via Netsh
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

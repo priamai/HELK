@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects creation of a local user via PowerShell
+filter:
+- query:
+    query_string:
+      query: (event_id:"4104" AND Message.keyword:(*New\-LocalUser*))
+index: logs-endpoint-winevent-*
+name: 243de76f-4725-4f2e-8225-a8a69b15ad61_0 PowerShell Create Local User
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

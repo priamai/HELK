@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the use of Windows Credential Editor (WCE)
+filter:
+- query:
+    query_string:
+      query: registry_key_path.keyword:*Services\\WCESERVICE\\Start*
+index: logs-endpoint-winevent-*
+name: a6b33c02-8305-488f-8585-03cb2a7763f2_0 Windows Credential Editor Registry
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

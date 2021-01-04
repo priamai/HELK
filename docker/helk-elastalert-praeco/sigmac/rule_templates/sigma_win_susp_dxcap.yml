@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects execution of of Dxcap.exe
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_path.keyword:*\\dxcap.exe AND process_command_line.keyword:*\-c* AND process_command_line.keyword:*.exe*)
+index: logs-endpoint-winevent-*
+name: 60f16a96-db70-42eb-8f76-16763e333590_0 Application Whitelisting Bypass via Dxcap.exe
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Web servers that spawn shell processes could be the result of a successfully placed web shell or an other attack
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND process_parent_path.keyword:(*\\w3wp.exe OR *\\httpd.exe OR *\\nginx.exe OR *\\php\-cgi.exe OR *\\tomcat.exe) AND process_path.keyword:(*\\cmd.exe OR *\\sh.exe OR *\\bash.exe OR *\\powershell.exe OR *\\bitsadmin.exe))
+index: logs-endpoint-winevent-security-*
+name: 8202070f-edeb-4d31-a010-a26c72ac5600_0 Shells Spawned by Web Servers
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

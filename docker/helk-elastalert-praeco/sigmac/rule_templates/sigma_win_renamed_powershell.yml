@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the execution of a renamed PowerShell often used by attackers or malware
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND (file_description:"Windows\ PowerShell" AND file_company:"Microsoft\ Corporation") AND (NOT (process_path.keyword:(*\\powershell.exe OR *\\powershell_ise.exe))))
+index: logs-endpoint-winevent-security-*
+name: d178a2d7-129a-4ba4-8ee6-d6e1fecd5d20_0 Renamed PowerShell
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

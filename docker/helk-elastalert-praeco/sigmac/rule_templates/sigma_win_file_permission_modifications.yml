@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects a file or folder permissions modifications
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND ((process_path.keyword:(*\\takeown.exe OR *\\cacls.exe OR *\\icacls.exe) AND process_command_line.keyword:*\/grant*) OR (process_path.keyword:*\\attrib.exe AND process_command_line.keyword:*\-r*)))
+index: logs-endpoint-winevent-security-*
+name: 37ae075c-271b-459b-8d7b-55ad5f993dd8_0 File or Folder Permissions Modifications
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

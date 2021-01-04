@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects Elise backdoor acitivty as used by APT32
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND ((process_path:"C\:\\Windows\\SysWOW64\\cmd.exe" AND process_command_line.keyword:*\\Windows\\Caches\\NavShExt.dll\ *) OR process_command_line.keyword:*\\AppData\\Roaming\\MICROS\~1\\Windows\\Caches\\NavShExt.dll,Setting))
+index: logs-endpoint-winevent-security-*
+name: e507feb7-5f73-4ef6-a970-91bb6f6d744f_0 Elise Backdoor
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

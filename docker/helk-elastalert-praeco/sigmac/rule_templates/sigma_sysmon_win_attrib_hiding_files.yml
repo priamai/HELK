@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects usage of attrib.exe to hide files from users.
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (process_path.keyword:*\\attrib.exe AND process_command_line.keyword:*\ \+h\ *) AND (NOT ((event_id:"1" AND (process_command_line.keyword:*\\desktop.ini\ * OR (process_parent_path.keyword:*\\cmd.exe AND process_command_line.keyword:\+R\ \+H\ \+S\ \+A\ \\*.cui AND process_parent_command_line.keyword:C\:\\WINDOWS\\system32\\*.bat))))))
+index: logs-endpoint-winevent-sysmon-*
+name: 4281cb20-2994-4580-aa63-c8b86d019934_0 Hiding Files with Attrib.exe
+priority: 4
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

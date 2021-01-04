@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects process memory dump via comsvcs.dll and rundll32
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND (process_path.keyword:*\\rundll32.exe OR file_name_original:"RUNDLL32.EXE") AND process_command_line.keyword:(*comsvcs*MiniDump*full* OR *comsvcs*MiniDumpW*full*))
+index: logs-endpoint-winevent-*
+name: 09e6d5c0-05b8-4ff8-9eeb-043046ec774c_0 Process Dump via Comsvcs DLL
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

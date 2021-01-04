@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious encoded character syntax often used for defense evasion
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_command_line.keyword:*\(WCHAR\)0x*)
+index: logs-endpoint-winevent-sysmon-*
+name: e312efd0-35a1-407f-8439-b8d434b438a6_0 PowerShell Encoded Character Syntax
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects the execution of SecurityXploded Tools
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND (file_company:"SecurityXploded" OR process_path.keyword:*PasswordDump.exe OR OriginalFilename.keyword:*PasswordDump.exe))
+index: logs-endpoint-winevent-sysmon-*
+name: 7679d464-4f74-45e2-9e01-ac66c5eb041a_0 SecurityXploded Tool
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

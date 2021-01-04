@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Identifies usage of hh.exe executing recently modified .chm files.
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND process_path.keyword:*\\hh.exe AND process_command_line.keyword:*.chm*)
+index: logs-endpoint-winevent-*
+name: 68c8acb4-1b60-4890-8e82-3ddf7a6dba84_0 HH.exe Execution
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

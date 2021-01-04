@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects suspicious parameters of fsutil (deleting USN journal, configuring it with small size..). Might be used by ransomwares during the attack (seen by NotPetya and others)
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND (process_path.keyword:*\\fsutil.exe OR file_name_original:"fsutil.exe") AND process_command_line.keyword:(*deletejournal* OR *createjournal*))
+index: logs-endpoint-winevent-security-*
+name: add64136-62e5-48ea-807e-88638d02df1e_0 Fsutil Suspicious Invocation
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects PowerShell downgrade attack by comparing the host versions with the actually used engine version 2.0
+filter:
+- query:
+    query_string:
+      query: ((event_id:"400" AND powershell.engine.version.keyword:2.*) AND (NOT (powershell.host.version.keyword:2.*)))
+index: logs-endpoint-winevent-*
+name: 6331d09b-4785-4c13-980f-f96661356249_0 PowerShell Downgrade Attack
+priority: 3
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

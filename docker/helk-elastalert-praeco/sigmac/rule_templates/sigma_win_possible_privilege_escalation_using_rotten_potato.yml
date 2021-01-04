@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detection of child processes spawned with SYSTEM privileges by parents with LOCAL SERVICE or NETWORK SERVICE privileges
+filter:
+- query:
+    query_string:
+      query: (event_id:"4688" AND (ParentUser:("NT\ AUTHORITY\\NETWORK\ SERVICE" OR "NT\ AUTHORITY\\LOCAL\ SERVICE") AND user_account:"NT\ AUTHORITY\\SYSTEM") AND (NOT (process_path.keyword:*\\rundll32.exe AND process_command_line.keyword:*DavSetCookie*)))
+index: logs-endpoint-winevent-*
+name: 6c5808ee-85a2-4e56-8137-72e5876a5096_0 Detection of Possible Rotten Potato
+priority: 2
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+

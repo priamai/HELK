@@ -1,0 +1,16 @@
+alert:
+- debug
+description: Detects specific process characteristics of Winnti malware noticed in Dec/Jan 2020 in a campaign against Honk Kong universities
+filter:
+- query:
+    query_string:
+      query: (event_id:"1" AND ((process_parent_path.keyword:(*C\:\\Windows\\Temp* OR *\\hpqhvind.exe*) AND process_path.keyword:C\:\\ProgramData\\DRM*) OR (process_parent_path.keyword:C\:\\ProgramData\\DRM* AND process_path.keyword:*\\wmplayer.exe) OR (process_parent_path.keyword:*\\Test.exe AND process_path.keyword:*\\wmplayer.exe) OR process_path:"C\:\\ProgramData\\DRM\\CLR\\CLR.exe" OR (process_parent_path.keyword:C\:\\ProgramData\\DRM\\Windows* AND process_path.keyword:*\\SearchFilterHost.exe)))
+index: logs-endpoint-winevent-sysmon-*
+name: 3121461b-5aa0-4a41-b910-66d25524edbb_0 Winnti Malware HK University Campaign
+priority: 1
+realert:
+  minutes: 0
+timestamp_field: etl_processed_time
+type: any
+
+
